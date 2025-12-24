@@ -1,13 +1,12 @@
 import os
-from mysql import connector
 from connection import get_connection
 
 class Queries:
     def insert_contacts(institution):
         sql = """
-            INSERT INTO contacts(first_name,last_name,phone_number)
-            VALUES(%s, %s, %s)
-            """
+              INSERT INTO contacts(first_name,last_name,phone_number)
+              VALUES(%s, %s, %s)
+              """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(sql,institution)
@@ -15,8 +14,8 @@ class Queries:
     
     def get_all_contact():
         sql = """
-                SELECT * FROM contacts
-                """
+              SELECT * FROM contacts
+              """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -24,10 +23,10 @@ class Queries:
     
     def update_contact():
         sql = """
-                UPDATE contacts
-                SET first_name= %s, last_name= %s, phone_number= %s
-                WHERE ID = %s
-                """
+              UPDATE contacts
+              SET first_name= %s, last_name= %s, phone_number= %s
+              WHERE ID = %s
+              """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(sql)
