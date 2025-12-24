@@ -2,6 +2,8 @@ from fastapi import FastAPI,HTTPException
 from typing import Annotated,List
 import uvicorn
 from model import Contact,Createcontact,Updatecontact
+from data_interactor import Queries
+
 
 app = FastAPI()
 
@@ -10,10 +12,12 @@ contacts:list[Contact] = []
 
 @app.get("/contacts")
 def get_all_contacts() -> list[Contact]:
+    contacts = Queries.get_all_contact()
     return contacts
 
 @app.post("/contacts")
 def create_new_contact(contact:Contact) -> dict:
+    contacts = Queries.get_all_contact()
     contacts.append(contact)
     return {
             "messege":"the create new contact data work successsfully",
@@ -22,6 +26,7 @@ def create_new_contact(contact:Contact) -> dict:
 
 @app.put("/contacts/{id}")
 def update_existing_contact(id:int,contact:Contact) -> dict:
+    contacts = Queries.get_all_contact()
     for updating in range(len(contacts)):
         if not contacts[updating].id == id:
             raise HTTPException(status_code=404, detail="ID not found")
@@ -32,6 +37,7 @@ def update_existing_contact(id:int,contact:Contact) -> dict:
 
 @app.delete("/contacts/{id}")
 def delete_contact() -> dict:
+    contacts = Queries.get_all_contact()
     for removing in range(len(contacts)):
         if not contacts[removing].id == id:
             raise HTTPException(status_code=404, detail="ID not found")
