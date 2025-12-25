@@ -1,0 +1,12 @@
+﻿ services:
+   app:
+     image: busybox
+     environment:
+       APP_PORT: 8080
+       APP_ENV: development
+     command: >
+       sh -c "
+       echo Running on port appAPP_PORT;
+       echo Environment: appAPP_ENV;
+       sleep 3600
+       "
