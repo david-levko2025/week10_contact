@@ -1,5 +1,6 @@
 import os
 from connection import get_connection
+from model import Contact
 
 class Queries:
     def insert_contacts(institution):
